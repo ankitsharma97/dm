@@ -18,16 +18,14 @@ class BankListAPIView(APIView):
 
 class BranchSearchAPIView(APIView):
     def get(self, request, *args, **kwargs):
-        # Read the CSV file
+
         df = pd.read_csv('bank_branches.csv')
         df = df.dropna()
         df = df.drop_duplicates()
 
-        # Extract query parameters from the request
         branch_name = request.query_params.get('branch_name', None)
         ifsc_code = request.query_params.get('ifsc', None)
 
-        # Filter the data based on the provided branch name or IFSC code
         if branch_name:
             branch_data = df[df['branch'].str.contains(branch_name, case=False, na=False)]
         elif ifsc_code:
@@ -35,7 +33,6 @@ class BranchSearchAPIView(APIView):
         else:
             return Response({"error": "Please provide a branch name or IFSC code to search."}, status=status.HTTP_400_BAD_REQUEST)
 
-        # If the branch is found, return the data, else return an error message
         if not branch_data.empty:
             branch_details = branch_data.to_dict('records')
             return Response(branch_details, status=status.HTTP_200_OK)
