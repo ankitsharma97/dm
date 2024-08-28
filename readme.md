@@ -1,9 +1,9 @@
 # Endpoint
 # Bank List Endpoint
-`curl -X GET "http://127.0.0.1:8000/banks/"`
+`https://dm-89bh.onrender.com/banks/`
 
 # Branch Search Endpoint 
-`curl -X GET "http://127.0.0.1:8000/branch-search/?branch_name=<branch_name>"`
+`https://dm-89bh.onrender.com/branch-search/?branch_name=kak`
 
 
 ## Prerequisites
